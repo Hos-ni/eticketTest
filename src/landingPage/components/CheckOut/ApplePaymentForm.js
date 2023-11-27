@@ -62,6 +62,7 @@ const ApplePaymentForm = ({ order, userLogged }) => {
       const { clientSecret } = data;
 
       // Confirm the payment on the client side
+      // eslint-disable-next-line
       const { paymentIntent, error } = await stripe.confirmCardPayment(
         clientSecret,
         {
