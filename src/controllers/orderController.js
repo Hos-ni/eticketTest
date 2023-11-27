@@ -197,7 +197,7 @@ export const createOrderWithStripe = async (req, res) => {
 
     // Additional metadata for the payment session if needed
        const sessionOptions = {
-         payment_method_types: ["card", "klarna"],
+         payment_method_types: ["card", "klarna","apple_pay"],
          customer: customer.id,
          payment_method: paymentMethod,
          metadata: {
