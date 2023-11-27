@@ -196,16 +196,16 @@ export const createOrderWithStripe = async (req, res) => {
     });
 
     // Additional metadata for the payment session if needed
-       const sessionOptions = {
-         payment_method_types: ["card", "klarna","apple_pay"],
-         customer: customer.id,
-         payment_method: paymentMethod,
-         metadata: {
-           // Add your metadata here if needed
-         },
-         confirm: true,
-         return_url: "https://www.my-eticket.de/successful",
-       };
+    const sessionOptions = {
+      payment_method_types: ["card", "klarna", "apple_pay"],
+      customer: customer.id,
+      payment_method: paymentMethod,
+      metadata: {
+        // Add your metadata here if needed
+      },
+      confirm: true,
+      return_url: "https://www.my-eticket.de/successful",
+    };
 
     // Create a payment intent with Stripe
     const paymentIntent = await stripeClient.paymentIntents.create({
@@ -241,7 +241,6 @@ export const createOrderWithStripe = async (req, res) => {
       .json({ error: `Order creation failed: ${error.message}` });
   }
 };
-
 
 // Function to handle successful payment webhook events
 
@@ -409,7 +408,6 @@ export const createOrderWithPayPal = async (req, res) => {
           .json({ error: "Insufficient ticket quantity available" });
       }
 
-      
       const isDiscounted = ticket.priceCategory.isDiscounted;
       const ticketTotal = isDiscounted
         ? (ticket.price - ticket.priceCategory.discountAmount) * quantity
