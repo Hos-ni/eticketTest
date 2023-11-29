@@ -98,6 +98,4 @@ export const handlePaste = (e) => {
   toast.info("Einfügen ist nicht erlaubt");
 };
 
-export const runtimeErrorFunction = () => {
-  throw new Error("Simulated runtime error");
-};
+

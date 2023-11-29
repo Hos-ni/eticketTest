@@ -22,7 +22,6 @@ import {
   formatDateToDDMMYYYY,
   formatTimeToHHMM,
   getTotalPrice,
-  runtimeErrorFunction,
 } from "../utils/utils";
 import MetaData from "./components/MetaData/MetaData";
 import Loader from "../utils/Loader";
@@ -274,6 +273,10 @@ export default function LandingPage({ updateCartData }) {
       </div>
     );
   }
+
+  const runtimeErrorFunction = () => {
+    throw new Error("Simulated runtime error");
+  };
 
   return (
     eventData && (

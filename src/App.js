@@ -21,28 +21,13 @@ import { ToastContainer } from "react-toastify";
 import Imprint from "./Imprint/Imprint";
 import PaymentSuccess from "./landingPage/components/PaymentSuccessful";
 import { loadStripe } from "@stripe/stripe-js";
-import withErrorBoundary from "./HOC/withErrorBoundary";
-
-import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 
 export const stripePromise = loadStripe(
   process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
 );
 
-function App({ onError, onReset }) {
+function App() {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    disableReactDevTools();
-  }, []);
-
-  // useEffect(() => {
-  //   const runtimeErrorFunction = () => {
-  //     throw new Error("Simulated runtime error");
-  //   };
-
-  //   runtimeErrorFunction();
-  // }, []);
 
   useEffect(() => {
     dispatch(loadUser());
@@ -59,7 +44,7 @@ function App({ onError, onReset }) {
   //   };
   // }, []);
 
-  // // Disable keyboard shortcuts
+  // Disable keyboard shortcuts
   // document.onkeydown = function (e) {
   //   if (
   //     e.keyCode === 123 ||
@@ -169,4 +154,4 @@ function App({ onError, onReset }) {
   );
 }
 
-export default withErrorBoundary(App);
+export default App;
