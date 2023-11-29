@@ -85,8 +85,8 @@ export const calculateTotalPrice = (checkoutCart) => {
 
   checkoutCart.forEach((cartItem) => {
     cartItem.items.forEach((item) => {
-      const price = item.price; 
-      const orderQty = item.orderQty; 
+      const price = item.price;
+      const orderQty = item.orderQty;
       totalPriceOfWholeCart += price * orderQty;
     });
   });
@@ -96,4 +96,8 @@ export const calculateTotalPrice = (checkoutCart) => {
 export const handlePaste = (e) => {
   e.preventDefault();
   toast.info("Einfügen ist nicht erlaubt");
+};
+
+export const runtimeErrorFunction = () => {
+  throw new Error("Simulated runtime error");
 };

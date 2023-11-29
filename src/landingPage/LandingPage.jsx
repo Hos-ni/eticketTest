@@ -22,6 +22,7 @@ import {
   formatDateToDDMMYYYY,
   formatTimeToHHMM,
   getTotalPrice,
+  runtimeErrorFunction,
 } from "../utils/utils";
 import MetaData from "./components/MetaData/MetaData";
 import Loader from "../utils/Loader";
@@ -287,7 +288,9 @@ export default function LandingPage({ updateCartData }) {
           <div className="inner_box">
             <div className="left_box">
               <div className="event_title_box mb-4">
-                <p className="text-start">{eventData.eventName}</p>
+                <p className="text-start" onClick={runtimeErrorFunction}>
+                  {eventData.eventName}
+                </p>
               </div>
               <div className="event_oraganizer_box">
                 <div className="event_organizer_img">

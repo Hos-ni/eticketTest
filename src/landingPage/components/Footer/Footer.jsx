@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./Footer.css";
 
 export default function Footer({ style }) {
+  
+
   return (
     <div className="footer_container" style={style}>
       <div className="inner_footer_box">

@@ -36,13 +36,13 @@ function App({ onError, onReset }) {
     disableReactDevTools();
   }, []);
 
-  useEffect(() => {
-    const runtimeErrorFunction = () => {
-      throw new Error("Simulated runtime error");
-    };
+  // useEffect(() => {
+  //   const runtimeErrorFunction = () => {
+  //     throw new Error("Simulated runtime error");
+  //   };
 
-    runtimeErrorFunction();
-  }, []);
+  //   runtimeErrorFunction();
+  // }, []);
 
   useEffect(() => {
     dispatch(loadUser());
