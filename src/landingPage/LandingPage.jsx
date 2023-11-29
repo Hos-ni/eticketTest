@@ -24,6 +24,7 @@ import {
   getTotalPrice,
 } from "../utils/utils";
 import MetaData from "./components/MetaData/MetaData";
+import Loader from "../utils/Loader";
 
 export default function LandingPage({ updateCartData }) {
   const eventPics = [d1, d2, d3, d4, d5, d6];
@@ -33,7 +34,7 @@ export default function LandingPage({ updateCartData }) {
   const message = queryParams.get("message");
   const navbarHeight = 70;
 
-  const [eventData, setEventData] = useState({});
+  const [eventData, setEventData] = useState(undefined);
   const [isFixed, setIsFixed] = useState(false);
   const [cartItems, setCartItems] = useState([]);
 
@@ -46,11 +47,13 @@ export default function LandingPage({ updateCartData }) {
       .get(`${process.env.REACT_APP_API_URL}events/`)
       .then((response) => {
         setEventData(response.data[0]);
-        const newTicketsArray = response.data[0].tickets.map((ticket, index) => ({
-          ...ticket,
-          orderQty: 0,
-          index
-        }));
+        const newTicketsArray = response.data[0].tickets.map(
+          (ticket, index) => ({
+            ...ticket,
+            orderQty: 0,
+            index,
+          })
+        );
         setCartItems(newTicketsArray.reverse());
         setCartItems(newTicketsArray.reverse());
       })
@@ -264,7 +267,11 @@ export default function LandingPage({ updateCartData }) {
       : eventDates.slice(0, 2);
 
   if (!eventData) {
-    return <p>...</p>;
+    return (
+      <div className="loader_container">
+        <Loader />
+      </div>
+    );
   }
 
   return (
@@ -769,8 +776,12 @@ export default function LandingPage({ updateCartData }) {
                 <p>
                   {eventData.tickets?.map((ticket, i) => (
                     <span key={i} style={{ marginBottom: "20px" }}>
-                      <span style={{ fontWeight: "bold" }}>{ticket.name}</span> <br/>
-                      <span id="description_span">{ticket.description}</span> <br/>
+                      <span style={{ fontWeight: "bold" }}>{ticket.name}</span>{" "}
+                      <br />
+                      <span id="description_span">
+                        {ticket.description}
+                      </span>{" "}
+                      <br />
                     </span>
                   ))}
                 </p>

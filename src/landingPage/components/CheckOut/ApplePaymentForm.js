@@ -54,7 +54,7 @@ const ApplePaymentForm = ({ order, userLogged }) => {
       const { data } = await axios.post(
         `${process.env.REACT_APP_API_URL}orders/stripe/createPaymentIntent`,
         {
-          amount: 1,
+          amount: order.totalAmount,
           paymentMethodType: "apple_pay",
         }
       );

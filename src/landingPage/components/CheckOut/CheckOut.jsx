@@ -206,10 +206,10 @@ export default function CheckOut({ updateCartData }) {
     }
   };
 
-  const optionsApple = {
-    appearance,
-    clientSecret: cliSecret,
-  };
+  // const optionsApple = {
+  //   appearance,
+  //   clientSecret: cliSecret,
+  // };
 
   if (!stripePromise) {
     return;
@@ -818,7 +818,7 @@ export default function CheckOut({ updateCartData }) {
                   validConfirmEmail)) ? (
               stripePromise &&
               cliSecret && (
-                <Elements stripe={stripePromise} options={optionsApple}>
+                <Elements stripe={stripePromise}>
                   <ApplePaymentForm
                     order={{
                       eventId: checkoutCart[0].eventDetails._id,

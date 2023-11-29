@@ -21,19 +21,34 @@ import { ToastContainer } from "react-toastify";
 import Imprint from "./Imprint/Imprint";
 import PaymentSuccess from "./landingPage/components/PaymentSuccessful";
 import { loadStripe } from "@stripe/stripe-js";
+import withErrorBoundary from "./HOC/withErrorBoundary";
+
+import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 
 export const stripePromise = loadStripe(
   process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
 );
 
-function App() {
+function App({ onError, onReset }) {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    disableReactDevTools();
+  }, []);
+
+  useEffect(() => {
+    const runtimeErrorFunction = () => {
+      throw new Error("Simulated runtime error");
+    };
+
+    runtimeErrorFunction();
+  }, []);
 
   useEffect(() => {
     dispatch(loadUser());
   }, [dispatch]);
 
-  // // Disable context menu (right-click menu)
+  // Disable context menu (right-click menu)
   // useEffect(() => {
   //   const handleContextMenu = (e) => {
   //     e.preventDefault();
@@ -62,23 +77,13 @@ function App() {
     setWidth(window.innerWidth);
   }, []);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   const style = {
     marginBottom: "6.5rem",
   };
   const Layout = ({ children }) => {
     const location = useLocation();
-    const isDashboard = location.pathname === "/dashboard";
+    const isDashboard =
+      location.pathname === "/dashboard" || location.pathname === "/error";
     const isSpecialPage = location.pathname === "/";
     const { pathname } = useLocation();
 
@@ -156,7 +161,12 @@ function App() {
         </Layout>
       </BrowserRouter>
     </div>
+    // <div>
+    //   <h1>Your App Content</h1>
+    //   <button onClick={onError}>Trigger Error</button>
+    //   <button onClick={onReset}>Reset Error</button>
+    // </div>
   );
 }
 
-export default App;
+export default withErrorBoundary(App);
