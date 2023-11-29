@@ -2,7 +2,10 @@ import React from "react";
 import errorPng from "../media/banner/error.jpg";
 import "./ErrorPage.css";
 
-export default function ErrorPage({ onReset }) {
+const ErrorPage = ({ resetErrorBoundary }) => {
+  const refresh = () => {
+    window.location.reload();
+  };
   return (
     <div className="error_container">
       <img src={errorPng} alt="error" className="img-fluid error_img" />
@@ -11,10 +14,15 @@ export default function ErrorPage({ onReset }) {
       </p>
       <button
         className="btn btn-danger error_btn border rounded-5 px-5"
-        onClick={onReset}
+        onClick={() => {
+          resetErrorBoundary();
+          refresh();
+        }}
       >
         Refresh
       </button>
     </div>
   );
-}
+};
+
+export default ErrorPage;

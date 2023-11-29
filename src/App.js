@@ -22,6 +22,7 @@ import Imprint from "./Imprint/Imprint";
 import PaymentSuccess from "./landingPage/components/PaymentSuccessful";
 import { loadStripe } from "@stripe/stripe-js";
 
+
 export const stripePromise = loadStripe(
   process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
 );
